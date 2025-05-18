@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VibeRoom - Room: Watch & Chat Together</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+/* public/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.container {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  padding: 2rem 3rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.highlight {
+  color: #ffdd57;
+}
+
+header p {
+  text-align: center;
+  margin-top: 0.3rem;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: #ddd;
+}
+
+.login-section {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.login-section h2 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+input[type='text'] {
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+}
+
+input[type='text']:focus {
+  box-shadow: 0 0 8px #ffdd57;
+}
+
+button {
+  background-color: #ffdd57;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #f1c40f;
+}
+
+.info-section {
+  margin-top: 3rem;
+  line-height: 1.6;
+}
+
+.info-section h2 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.info-section p {
+  max-width: 480px;
+  margin: 0 auto 1rem auto;
+  font-size: 1rem;
+  color: #ddd;
+  text-align: center;
+}
+
+.info-section ul {
+  list-style-type: disc;
+  max-width: 320px;
+  margin: 0 auto;
+  padding-left: 1.2rem;
+  color: #ffdd57;
+  font-weight: 600;
+}
+
+footer {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+    .room-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    #video-url-input {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #video-url-input input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      box-shadow: 0 0 4px #ffdd57;
+    }
+
+    #video-url-input button {
+      background-color: #ffdd57;
+      border: none;
+      border-radius: 6px;
+      padding: 0.8rem 1.2rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: #333;
+      transition: background-color 0.3s ease;
+    }
+
+    #video-url-input button:hover {
+      background-color: #f1c40f;
+    }
+
+    #player {
+      display: block;
+      margin: 0 auto 1.5rem auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      max-width: 100%;
+      width: 640px;
+      height: 360px;
+      background: black;
+    }
+
+    .chat-container {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 1rem;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      height: 300px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    #chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      background: #111;
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      border: 1px solid #444;
+    }
+
+    #chat-input {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    #chat-input input {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    #chat-input button {
+      background-color: #ffdd57;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #333;
+      transition: background-color 0.3s ease;
+    }
+
+    #chat-input button:hover {
+      background-color: #f1c40f;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>VibeRoom <span class="highlight">- Room: <span id="room-name"></span></span></h1>
+      <p>Watch videos & chat together in perfect sync.</p>
+    </header>
+
+    <section id="video-url-input">
+      <input type="text" id="video-url" placeholder="Paste YouTube video URL here" />
+      <button id="load-video-btn">Load Video</button>
+    </section>
+
+    <div id="player"></div>
+
+    <section class="chat-container">
+      <h2>Chat</h2>
+      <div id="chat-messages"></div>
+      <form id="chat-form">
+        <div id="chat-input">
+          <input type="text" id="chat-message" placeholder="Type a message..." autocomplete="off" />
+          <button type="submit">Send</button>
+        </div>
+      </form>
+    </section>
+
+    <footer>© 2025 VibeRoom | Built with ❤️ by You</footer>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    const socket = io();
+
+    // Get username & room from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username') || 'Guest';
+    const room = urlParams.get('room') || 'Lobby';
+
+    document.getElementById('room-name').textContent = room;
+
+    // Join room
+    socket.emit('joinRoom', { username, room });
+
+    // Chat functionality
+    const chatMessages = document.getElementById('chat-messages');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-message');
+
+    function addChatMessage({ username: user, message }) {
+      const msgDiv = document.createElement('div');
+      msgDiv.innerHTML = `<strong>${user}:</strong> ${message}`;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    socket.on('chatMessage', addChatMessage);
+
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const msg = chatInput.value.trim();
+      if (!msg) return;
+      socket.emit('chatMessage', msg);
+      chatInput.value = '';
+    });
+
+    // YouTube IFrame API player setup
+    let player;
+    let isRemoteAction = false;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: '',
+        playerVars: {
+          modestbranding: 1,
+          rel: 0,
+        },
+        events: {
+          onStateChange: onPlayerStateChange,
+        },
+      });
+    }
+
+    function getYouTubeVideoID(url) {
+      const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|embed)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/;
+      const match = url.match(regex);
+      return match ? match[1] : null;
+    }
+
+    document.getElementById('load-video-btn').addEventListener('click', () => {
+      const url = document.getElementById('video-url').value.trim();
+      const videoID = getYouTubeVideoID(url);
+      if (!videoID) {
+        alert('Please enter a valid YouTube URL.');
+        return;
+      }
+      player.loadVideoById(videoID);
+      socket.emit('loadVideo', videoID);
+    });
+
+    function onPlayerStateChange(event) {
+      if (isRemoteAction) return;
+      const state = event.data;
+      const currentTime = player.getCurrentTime();
+
+      if (state === YT.PlayerState.PLAYING) {
+        socket.emit('videoPlay', currentTime);
+      } else if (state === YT.PlayerState.PAUSED) {
+        socket.emit('videoPause', currentTime);
+      }
+    }
+
+    socket.on('videoPlay', (time) => {
+      if (!player) return;
+      isRemoteAction = true;
+      player.seekTo(time, true);
+      player.playVideo();
+      isRemoteAction = false;
+    });
+
+    socket.on('videoPause', (time) => {
+      if (!player) return;
+      isRemoteAction = true;
+      player.seekTo(time, true);
+      player.pauseVideo();
+      isRemoteAction = false;
+    });
+
+    socket.on('videoSeek', (time) => {
+      if (!player) return;
+      isRemoteAction = true;
+      player.seekTo(time, true);
+      isRemoteAction = false;
+    });
+
+    socket.on('loadVideo', (videoID) => {
+      if (!player) return;
+      isRemoteAction = true;
+      player.loadVideoById(videoID);
+      isRemoteAction = false;
+    });
+
+    // Detect user seeking manually
+    let lastTime = 0;
+    setInterval(() => {
+      if (!player || isRemoteAction) return;
+      const currentTime = player.getCurrentTime();
+      const state = player.getPlayerState();
+
+      if (state === YT.PlayerState.PLAYING && Math.abs(currentTime - lastTime) > 1.5) {
+        socket.emit('videoSeek', currentTime);
+      }
+      lastTime = currentTime;
+    }, 1000);
+  </script>
+</body>
+</html>
