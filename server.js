@@ -1,79 +1,76 @@
+// server.js
 const express = require('express');
+const http = require('http');
+const path = require('path');
+const { Server } = require('socket.io');
+
 const app = express();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const server = http.createServer(app);
+const io = new Server(server);
 
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static('public'));
+// Serve static files from public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
-const rooms = {}; // { roomId: { videoState, users: Set } }
+io.on('connection', (socket) => {
+  console.log('New client connected:', socket.id);
 
-io.on('connection', socket => {
-  console.log('User connected:', socket.id);
-
-  socket.on('join-room', (roomId, username) => {
-    socket.join(roomId);
+  // Join a room
+  socket.on('joinRoom', ({ username, room }) => {
+    socket.join(room);
     socket.username = username;
-    socket.roomId = roomId;
+    socket.room = room;
 
-    if (!rooms[roomId]) {
-      rooms[roomId] = {
-        videoState: {
-          playing: false,
-          currentTime: 0,
-          videoId: 'dQw4w9WgXcQ' // default video (Rick Astley!)
-        },
-        users: new Set(),
-      };
-    }
+    console.log(`${username} joined room: ${room}`);
 
-    rooms[roomId].users.add(socket.id);
-
-    // Send current video state to this user
-    socket.emit('video-state', rooms[roomId].videoState);
-
-    // Notify room about new user
-    io.to(roomId).emit('chat-message', {
+    // Notify others in room
+    socket.to(room).emit('chatMessage', {
       username: 'System',
-      message: `${username} joined the room`,
+      message: `${username} has joined the room.`,
     });
 
-    // Update user list
-    io.to(roomId).emit('user-list', Array.from(rooms[roomId].users));
+    // Optionally send back current room info or users list
   });
 
-  socket.on('chat-message', msg => {
-    if (socket.roomId) {
-      io.to(socket.roomId).emit('chat-message', {
+  // Chat message received
+  socket.on('chatMessage', (msg) => {
+    const room = socket.room;
+    if (room) {
+      io.to(room).emit('chatMessage', {
         username: socket.username,
         message: msg,
       });
     }
   });
 
-  socket.on('video-control', data => {
-    // Update room video state
-    if (socket.roomId && rooms[socket.roomId]) {
-      rooms[socket.roomId].videoState = { ...rooms[socket.roomId].videoState, ...data };
-      // Broadcast to everyone else in the room
-      socket.to(socket.roomId).emit('video-state', rooms[socket.roomId].videoState);
-    }
+  // Video controls: play
+  socket.on('videoPlay', (currentTime) => {
+    socket.to(socket.room).emit('videoPlay', currentTime);
   });
 
+  // Video controls: pause
+  socket.on('videoPause', (currentTime) => {
+    socket.to(socket.room).emit('videoPause', currentTime);
+  });
+
+  // Video controls: seek
+  socket.on('videoSeek', (time) => {
+    socket.to(socket.room).emit('videoSeek', time);
+  });
+
+  // Disconnect
   socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
-    if (socket.roomId && rooms[socket.roomId]) {
-      rooms[socket.roomId].users.delete(socket.id);
-      io.to(socket.roomId).emit('chat-message', {
+    if (socket.room) {
+      socket.to(socket.room).emit('chatMessage', {
         username: 'System',
-        message: `${socket.username} left the room`,
+        message: `${socket.username} has left the room.`,
       });
-      io.to(socket.roomId).emit('user-list', Array.from(rooms[socket.roomId].users));
     }
+    console.log('Client disconnected:', socket.id);
   });
 });
 
-http.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+server.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
