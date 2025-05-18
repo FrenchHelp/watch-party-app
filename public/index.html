@@ -1,48 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VibeRoom – Login</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="container">
-    <h1 class="logo">🎬 VibeRoom</h1>
-    <p class="tagline">Watch. Chat. Vibe Together.</p>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #1f1c2c, #928dab);
+  color: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    <div class="form-container">
-      <form id="login-form">
-        <input type="text" id="username" placeholder="Username" required />
-        <input type="password" id="password" placeholder="Password" required />
-        <button type="submit">Login / Sign Up</button>
-      </form>
-      <p class="info">Don’t have an account? Just enter a new username and password — we’ll create it for you!</p>
-      <p id="login-error" class="error-msg"></p>
-    </div>
-  </div>
+.container {
+  text-align: center;
+  max-width: 400px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
 
-  <script>
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
+.logo {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
 
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
+.tagline {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
 
-      const data = await res.json();
+.form-container input {
+  display: block;              /* Make each input take up full width */
+  margin: 10px auto;           /* Auto centers horizontally */
+  padding: 10px;
+  width: 80%;                  /* Adjust as needed */
+  max-width: 400px;            /* Optional: keep it from getting too wide */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
 
-      if (data.success) {
-        localStorage.setItem('viberoomUser', username);
-        window.location.href = 'dashboard.html';
-      } else {
-        document.getElementById('login-error').textContent = data.message || 'Login failed';
-      }
-    });
-  </script>
-</body>
-</html>
+.form-container button {
+  width: 100%;
+  padding: 0.75rem;
+  background: #ff416c;
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: transform 0.2s;
+}
+
+.form-container button:hover {
+  transform: scale(1.02);
+}
+
+.info {
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  opacity: 0.7;
+}
+
+.error-msg {
+  color: #ffbaba;
+  margin-top: 0.5rem;
+}
+
+.welcome h2 {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.recent-activity {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity-list li {
+  margin: 0.5rem 0;
+}
+
+.activity-list a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.activity-list a:hover {
+  text-decoration: underline;
+}
+
+.dashboard-nav {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.logout {
+  background-color: #dc3545;
+}
+
+.logout:hover {
+  background-color: #a71d2a; 
+}
