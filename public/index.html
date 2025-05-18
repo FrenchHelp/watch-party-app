@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VibeRoom – Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1 class="logo">🎬 VibeRoom</h1>
+    <p class="tagline">Watch. Chat. Vibe Together.</p>
+
+    <div class="form-container">
+      <form id="login-form">
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login / Sign Up</button>
+      </form>
+      <p class="info">Don’t have an account? Just enter a new username and password — we’ll create it for you!</p>
+      <p id="login-error" class="error-msg"></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        localStorage.setItem('viberoomUser', username);
+        window.location.href = 'dashboard.html';
+      } else {
+        document.getElementById('login-error').textContent = data.message || 'Login failed';
+      }
+    });
+  </script>
+</body>
+</html>
