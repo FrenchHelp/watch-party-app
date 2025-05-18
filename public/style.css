@@ -1,72 +1,125 @@
+/* public/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #1f1c2c, #928dab);
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   margin: 0;
-  padding: 0;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  padding: 2rem;
 }
 
 .container {
-  text-align: center;
-  max-width: 400px;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 2rem;
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-}
-
-.logo {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.tagline {
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-  opacity: 0.8;
-}
-
-.form-container input {
-  display: block;              /* Make each input take up full width */
-  margin: 10px auto;           /* Auto centers horizontally */
-  padding: 10px;
-  width: 80%;                  /* Adjust as needed */
-  max-width: 400px;            /* Optional: keep it from getting too wide */
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-.form-container button {
+  max-width: 600px;
   width: 100%;
-  padding: 0.75rem;
-  background: #ff416c;
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
-  color: white;
-  font-weight: bold;
+  padding: 2rem 3rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.highlight {
+  color: #ffdd57;
+}
+
+header p {
+  text-align: center;
+  margin-top: 0.3rem;
+  font-weight: 400;
+  font-size: 1.1rem;
+  color: #ddd;
+}
+
+.login-section {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+.login-section h2 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+input[type='text'] {
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
   border: none;
-  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+input[type='text']:focus {
+  box-shadow: 0 0 8px #ffdd57;
+}
+
+button {
+  background-color: #ffdd57;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font-weight: 700;
+  font-size: 1.1rem;
   cursor: pointer;
-  margin-top: 1rem;
-  transition: transform 0.2s;
+  color: #333;
+  transition: background-color 0.3s ease;
 }
 
-.form-container button:hover {
-  transform: scale(1.02);
+button:hover {
+  background-color: #f1c40f;
 }
 
-.info {
-  font-size: 0.85rem;
-  margin-top: 1rem;
-  opacity: 0.7;
+.info-section {
+  margin-top: 3rem;
+  line-height: 1.6;
 }
 
-.error-msg {
-  color: #ffbaba;
-  margin-top: 0.5rem;
+.info-section h2 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.info-section p {
+  max-width: 480px;
+  margin: 0 auto 1rem auto;
+  font-size: 1rem;
+  color: #ddd;
+  text-align: center;
+}
+
+.info-section ul {
+  list-style-type: disc;
+  max-width: 320px;
+  margin: 0 auto;
+  padding-left: 1.2rem;
+  color: #ffdd57;
+  font-weight: 600;
+}
+
+footer {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
 }
