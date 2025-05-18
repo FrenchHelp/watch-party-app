@@ -1,136 +1,77 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #1f1c2c, #928dab);
-  color: white;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VibeRoom - Watch Videos & Chat Together</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Welcome to <span class="highlight">VibeRoom</span></h1>
+      <p>Watch videos with friends and chat in real time — all in sync!</p>
+    </header>
 
-.container {
-  text-align: center;
-  max-width: 400px;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-}
+    <section class="login-section">
+      <h2>Join or Create a Room</h2>
+      <form id="join-form">
+        <input
+          type="text"
+          id="username"
+          placeholder="Your username"
+          required
+          minlength="2"
+          maxlength="20"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          id="room"
+          placeholder="Room name"
+          required
+          minlength="2"
+          maxlength="20"
+          autocomplete="off"
+        />
+        <button type="submit">Enter VibeRoom</button>
+      </form>
+    </section>
 
-.logo {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
+    <section class="info-section">
+      <h2>About VibeRoom</h2>
+      <p>
+        VibeRoom lets you create private rooms to watch YouTube videos with your friends
+        in perfect sync. Chat, laugh, and vibe together no matter where you are.
+      </p>
+      <ul>
+        <li>Real-time synced video playback</li>
+        <li>Live chat with everyone in your room</li>
+        <li>Easy to join and start watching</li>
+        <li>No downloads, works in your browser</li>
+      </ul>
+    </section>
 
-.tagline {
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-  opacity: 0.8;
-}
+    <footer>
+      <small>© 2025 VibeRoom | Built with ❤️ by You</small>
+    </footer>
+  </div>
 
-.form-container input {
-  display: block;              /* Make each input take up full width */
-  margin: 10px auto;           /* Auto centers horizontally */
-  padding: 10px;
-  width: 80%;                  /* Adjust as needed */
-  max-width: 400px;            /* Optional: keep it from getting too wide */
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
+  <script>
+    // Simple form handler to redirect user to room page (we'll create this later)
+    const form = document.getElementById('join-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const room = document.getElementById('room').value.trim();
 
-.form-container button {
-  width: 100%;
-  padding: 0.75rem;
-  background: #ff416c;
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: transform 0.2s;
-}
-
-.form-container button:hover {
-  transform: scale(1.02);
-}
-
-.info {
-  font-size: 0.85rem;
-  margin-top: 1rem;
-  opacity: 0.7;
-}
-
-.error-msg {
-  color: #ffbaba;
-  margin-top: 0.5rem;
-}
-
-.welcome h2 {
-  margin-top: 1rem;
-  font-weight: 600;
-}
-
-.recent-activity {
-  margin-top: 2rem;
-  width: 100%;
-  max-width: 500px;
-}
-
-.activity-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.activity-list li {
-  margin: 0.5rem 0;
-}
-
-.activity-list a {
-  text-decoration: none;
-  color: #007bff;
-  font-weight: 500;
-}
-
-.activity-list a:hover {
-  text-decoration: underline;
-}
-
-.dashboard-nav {
-  margin-top: 2.5rem;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.btn {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-  text-align: center;
-}
-
-.btn:hover {
-  background-color: #0056b3;
-}
-
-.logout {
-  background-color: #dc3545;
-}
-
-.logout:hover {
-  background-color: #a71d2a; 
-}
+      if (username && room) {
+        // URL encode params and redirect to /room.html (will build next)
+        const params = new URLSearchParams({ username, room });
+        window.location.href = `/room.html?${params.toString()}`;
+      }
+    });
+  </script>
+</body>
+</html>
